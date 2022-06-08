@@ -1,0 +1,64 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="input-group">
+              <h4  style="margin-bottom: 25px;">Register</h4>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="firstname" cFormControl name="firstName" #firstName="ngModel" required [(ngModel)]="userModel.firstName" placeholder="First Name" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="lastname" name="lastName" [(ngModel)]="userModel.lastName" #lastName="ngModel" required cFormControl placeholder="Last Name" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="username" name="username" [(ngModel)]="userModel.username" #username="ngModel" required cFormControl placeholder="Username" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>@</span>
+                <input autoComplete="email" name="email" [(ngModel)]="userModel.email" #email="ngModel" required cFormControl placeholder="Email" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="phone" name="phone" [(ngModel)]="userModel.phone" #phone="ngModel" required cFormControl placeholder="Phone" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="nic" name="nic" [(ngModel)]="userModel.nic" cFormControl #nic="ngModel" required placeholder="NIC" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="address" name="address" [(ngModel)]="userModel.address" #address="ngModel" required cFormControl placeholder="Address" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input autoComplete="new-password" name="password" [(ngModel)]="userModel.password" #password="ngModel" required cFormControl placeholder="Password" type="password" />
+              </c-input-group>
+              <div class="d-grid">
+                <button cButton color="success" type="submit">Create Account</button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

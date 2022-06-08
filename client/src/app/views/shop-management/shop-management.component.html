@@ -1,0 +1,141 @@
+<button class="btn btn-primary btn-sm" style="margin-bottom: 25px;" (click)="openNewDialog()">Create Shop</button>
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Gas Shop List</strong>
+      </c-card-header>
+      <c-card-body>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Location</th>
+                <th scope="col">Longitude</th>
+                <th scope="col">Latitude</th>
+                <th scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let shop of shopList">
+                <th scope="row">{{shop.id}}</th>
+                <th scope="row">{{shop.name}}</th>
+                <th scope="row">{{shop.telephone}}</th>
+                <th scope="row">{{shop.location}}</th>
+                <th scope="row">{{shop.longitude}}</th>
+                <th scope="row">{{shop.latitude}}</th>
+                <th scope="row"><button (click)="edit(shop)" style="margin-right:15px;" class="btn btn-info btn-sm">Edit</button><button (click)="delete(shop.id)" class="btn btn-danger btn-sm">Delete</button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<ng-template #createModal let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="input-group">
+      <h4 style="margin-bottom: 25px;">Create New Shop</h4>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="name" cFormControl name="name" #name="ngModel" required
+          [(ngModel)]="mainModel.name" placeholder="Name" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="location" name="location" [(ngModel)]="mainModel.location" #location="ngModel" required
+          cFormControl placeholder="Location" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="telephone" name="telephone" [(ngModel)]="mainModel.telephone" #telephone="ngModel" required
+          cFormControl placeholder="Telephone" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="longitude" name="longitude" [(ngModel)]="mainModel.longitude" #longitude="ngModel" required
+          cFormControl placeholder="Longitude" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="latitude" name="latitude" [(ngModel)]="mainModel.latitude" #telephone="ngModel" required
+          cFormControl placeholder="Latitude" />
+      </c-input-group>
+      <div class="d-grid">
+        <button style="margin-right:15px;" cButton color="success" type="submit">Create Shop</button>
+      </div>
+      <div class="d-grid">
+        <button type="button" ngbAutofocus class="btn btn-danger btn-sm" (click)="modal.close('');">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #updateModal let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="f.form.valid && onUpdate()" #f="ngForm" class="input-group">
+      <h4 style="margin-bottom: 25px;">Update Shop</h4>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="name" cFormControl name="name" #name="ngModel" required
+          [(ngModel)]="mainUpdateModel.name" placeholder="Name" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="location" name="location" [(ngModel)]="mainUpdateModel.location" #location="ngModel" required
+          cFormControl placeholder="Location" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="telephone" name="telephone" [(ngModel)]="mainUpdateModel.telephone" #telephone="ngModel" required
+          cFormControl placeholder="Telephone" />
+      </c-input-group>   
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="longitude" name="longitude" [(ngModel)]="mainUpdateModel.longitude" #longitude="ngModel" required
+          cFormControl placeholder="Longitude" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="latitude" name="latitude" [(ngModel)]="mainUpdateModel.latitude" #telephone="ngModel" required
+          cFormControl placeholder="Latitude" />
+      </c-input-group>
+      <div class="d-grid">
+        <button style="margin-right:15px;" cButton color="success" type="submit">Update Shop</button>
+      </div>
+      <div class="d-grid">
+        <button type="button" ngbAutofocus class="btn btn-danger btn-sm" (click)="modal.close('');">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

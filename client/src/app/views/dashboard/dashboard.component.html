@@ -1,0 +1,14 @@
+<c-card class="mb-4">
+  <c-card-body>
+    <c-row>
+      <h6 style="margin-bottom: 25px;">Gas Stock Availability Locations</h6>
+      <agm-map [latitude]='lat' [longitude]='long' [zoom]='zoom'>
+        <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng">
+          <agm-info-window #infoWindow>
+            {{ marker.label }}
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </c-row>
+  </c-card-body>
+</c-card>

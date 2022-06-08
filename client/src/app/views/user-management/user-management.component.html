@@ -1,0 +1,190 @@
+<button class="btn btn-primary btn-sm" style="margin-bottom: 25px;" (click)="openNewDialog()">Create User</button>
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>User List</strong>
+      </c-card-header>
+      <c-card-body>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">firstName</th>
+                <th scope="col">lastName</th>
+                <th scope="col">email</th>
+                <th scope="col">nic</th>
+                <th scope="col">username</th>
+                <th scope="col">address</th>
+                <th scope="col">role</th>
+                <th scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of userList">
+                <th scope="row">{{user.id}}</th>
+                <th scope="row">{{user.firstName}}</th>
+                <th scope="row">{{user.lastName}}</th>
+                <th scope="row">{{user.email}}</th>
+                <th scope="row">{{user.nic}}</th>
+                <th scope="row">{{user.username}}</th>
+                <th scope="row">{{user.address}}</th>
+                <th scope="row">{{user.roles[0]['name'] | titlecase}}</th>
+                <th scope="row"><button (click)="edit(user)" style="margin-right:15px;" class="btn btn-info btn-sm">Edit</button><button (click)="delete(user.id)" class="btn btn-danger btn-sm">Delete</button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<ng-template #createModal let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="input-group">
+      <h4 style="margin-bottom: 25px;">Create New User</h4>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="firstname" cFormControl name="firstName" #firstName="ngModel" required
+          [(ngModel)]="userModel.firstName" placeholder="First Name" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="lastname" name="lastName" [(ngModel)]="userModel.lastName" #lastName="ngModel" required
+          cFormControl placeholder="Last Name" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="username" name="username" [(ngModel)]="userModel.username" #username="ngModel" required
+          cFormControl placeholder="Username" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>@</span>
+        <input autoComplete="email" name="email" [(ngModel)]="userModel.email" #email="ngModel" required cFormControl
+          placeholder="Email" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="phone" name="phone" [(ngModel)]="userModel.phone" #phone="ngModel" required cFormControl
+          placeholder="Phone" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="nic" name="nic" [(ngModel)]="userModel.nic" cFormControl #nic="ngModel" required
+          placeholder="NIC" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="address" name="address" [(ngModel)]="userModel.address" #address="ngModel" required
+          cFormControl placeholder="Address" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilLockLocked"></svg>
+        </span>
+        <input autoComplete="new-password" name="password" [(ngModel)]="userModel.password" #password="ngModel" required
+          cFormControl placeholder="Password" type="password" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <select cSelect class="mb-3" name="roleId" [(ngModel)]="userModel.roleId" #roleId="ngModel" required>
+          <option value="1">Admin</option>
+          <option value="2">Shop</option>
+          <option value="3">Customer</option>
+        </select>
+      </c-input-group>
+      <div class="d-grid">
+        <button style="margin-right:15px;" cButton color="success" type="submit">Create Account</button>
+      </div>
+      <div class="d-grid">
+        <button type="button" ngbAutofocus class="btn btn-danger btn-sm" (click)="modal.close('');">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #updateModal let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="f.form.valid && onUpdate()" #f="ngForm" class="input-group">
+      <h4 style="margin-bottom: 25px;">Update User</h4>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="firstname" cFormControl name="firstName" #firstName="ngModel" required
+          [(ngModel)]="userUpdateModel.firstName" placeholder="First Name" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="lastname" name="lastName" [(ngModel)]="userUpdateModel.lastName" #lastName="ngModel" required
+          cFormControl placeholder="Last Name" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="username" name="username" [(ngModel)]="userUpdateModel.username" [disabled]="true" #username="ngModel" required
+          cFormControl placeholder="Username" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>@</span>
+        <input autoComplete="email" name="email" [(ngModel)]="userUpdateModel.email" #email="ngModel" required cFormControl
+          placeholder="Email" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="phone" name="phone" [(ngModel)]="userUpdateModel.phone" #phone="ngModel" required cFormControl
+          placeholder="Phone" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="nic" name="nic" [(ngModel)]="userUpdateModel.nic" cFormControl #nic="ngModel" [disabled]="true" required
+          placeholder="NIC" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="address" name="address" [(ngModel)]="userUpdateModel.address" #address="ngModel" required
+          cFormControl placeholder="Address" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <select cSelect class="mb-3" name="roleId" [(ngModel)]="userUpdateModel.roleId" #roleId="ngModel" [disabled]="true" required>
+          <option value="1">Admin</option>
+          <option value="2">Shop</option>
+          <option value="3">Customer</option>
+        </select>
+      </c-input-group>
+      <div class="d-grid">
+        <button style="margin-right:15px;" cButton color="success" type="submit">Update</button>
+      </div>
+      <div class="d-grid">
+        <button type="button" ngbAutofocus class="btn btn-danger btn-sm" (click)="modal.close('');">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

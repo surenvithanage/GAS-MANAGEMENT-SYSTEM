@@ -1,0 +1,120 @@
+<button class="btn btn-primary btn-sm" style="margin-bottom: 25px;" (click)="openNewDialog()">Create Order</button>
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Gas Order List</strong>
+      </c-card-header>
+      <c-card-body>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orderList">
+                <th scope="row">{{order.id}}</th>
+                <th scope="row">{{order.email}}</th>
+                <th scope="row">{{order.mobileNumber}}</th>
+                <th scope="row">{{order.quantity}} Gas Cylinder</th>
+                <th scope="row"><button (click)="edit(order)" style="margin-right:15px;" class="btn btn-info btn-sm">Edit</button><button (click)="delete(order.id)" class="btn btn-danger btn-sm">Delete</button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+
+<ng-template #createModal let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="input-group">
+      <h4 style="margin-bottom: 25px;">Create New Order</h4>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="email" cFormControl name="email" #email="ngModel" required
+          [(ngModel)]="mainModel.email" placeholder="Email" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="mobileNumber" name="mobileNumber" [(ngModel)]="mainModel.mobileNumber" #mobileNumber="ngModel" required
+          cFormControl placeholder="Mobile Number" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="quantity" name="quantity" [(ngModel)]="mainModel.quantity" #quantity="ngModel" [readonly]="true" required
+          cFormControl placeholder="Quantity" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <select cSelect class="mb-3" name="shopId" [(ngModel)]="mainModel.shopId" #shopId="ngModel" required>
+          <option value="{{shop.id}}" *ngFor="let shop of shopList">{{shop.name}} - {{shop.location}}</option>
+        </select>
+      </c-input-group>
+      <div class="d-grid">
+        <button style="margin-right:15px;" cButton color="success" type="submit">Create Order</button>
+      </div>
+      <div class="d-grid">
+        <button type="button" ngbAutofocus class="btn btn-danger btn-sm" (click)="modal.close('');">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #updateModal let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="f.form.valid && onUpdate()" #f="ngForm" class="input-group">
+      <h4 style="margin-bottom: 25px;">Update Order</h4>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="email" cFormControl name="email" #email="ngModel" required
+          [(ngModel)]="mainUpdateModel.email" placeholder="Email" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="mobileNumber" name="mobileNumber" [(ngModel)]="mainUpdateModel.mobileNumber" #mobileNumber="ngModel" required
+          cFormControl placeholder="Mobile Number" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <span cInputGroupText>
+          <svg cIcon name="cilUser"></svg>
+        </span>
+        <input autoComplete="quantity" name="quantity"  [readonly]="true" [(ngModel)]="mainUpdateModel.quantity" #quantity="ngModel" required
+          cFormControl placeholder="Quantity" />
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <select cSelect class="mb-3" name="shopId" [(ngModel)]="mainUpdateModel.shopId" #shopId="ngModel" required>
+          <option value="{{shop.id}}" *ngFor="let shop of shopList">{{shop.name}} - {{shop.location}}</option>
+        </select>
+      </c-input-group>
+      <div class="d-grid">
+        <button style="margin-right:15px;" cButton color="success" type="submit">Create Order</button>
+      </div>
+      <div class="d-grid">
+        <button type="button" ngbAutofocus class="btn btn-danger btn-sm" (click)="modal.close('');">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
