@@ -8,16 +8,18 @@ public class Email {
     String subject;
     String text;
     String template;
+    Map<String, Object> properties;
 
     public Email() {
     }
 
-    public Email(String to, String from, String subject, String text, String template) {
+    public Email(String to, String from, String subject, String text, String template, Map<String, Object> properties) {
         this.to = to;
         this.from = from;
         this.subject = subject;
         this.text = text;
         this.template = template;
+        this.properties = properties;
     }
 
     public String getTo() {
@@ -58,5 +60,13 @@ public class Email {
 
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    public Map<String, Object> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, Object> properties) {
+        this.properties = properties;
     }
 }

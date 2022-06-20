@@ -9,10 +9,10 @@ import com.gas.management.server.service.sms.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 @Transactional
@@ -40,12 +40,13 @@ public class OrderServiceImpl implements OrderService {
 
 //            smsService.sendSMS(orderDto.getMobileNumber());
 
-//            Email email = new Email();
-//            email.setFrom("surenanthonyvithanage@gmail.com");
-//            email.setTo(orderDto.getEmail());
-//            email.setSubject("Order Placed Successfully");
-//            email.setTemplate("Order have been placed successfully. You can come and collect the Gas on " + new Date() + " after 13.00 pm. Thank you");
-//            mailService.sendSimpleMessage(email);
+            Email email = new Email();
+            email.setFrom("surenanthonyvithanage@gmail.com");
+            email.setTo(orderDto.getEmail());
+            email.setSubject("Order Placed Successfully");
+            email.setTemplate("welcome-email.html");
+            email.setText("Order have been placed successfully. You can come and collect the Gas on " + new Date() + " after 13.00 pm. Thank you");
+            mailService.sendHtmlMessage(email);
 
             return orderRespository.save(order);
         } catch (Exception e) {
